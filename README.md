@@ -27,18 +27,32 @@ Open [http://localhost:8000/docs](http://localhost:8000/docs) for Swagger UI.
 
 ```
 app/
-├── main.py            # FastAPI app factory & lifespan
-├── config.py          # pydantic-settings configuration
-├── dependencies.py    # Shared FastAPI dependencies
-├── exceptions.py      # Custom exception classes
-├── middleware.py       # CORS, error handlers
-├── core/              # Infrastructure clients (Supabase, Groq, TTS, Auth)
-├── models/            # Pydantic request/response schemas
-├── agents/            # AI agent logic (Setup, Interviewer, Coach)
-├── routers/           # HTTP & WebSocket endpoint definitions
-├── services/          # Business logic layer
-└── utils/             # Helpers (audio, prompts, validators)
-tests/                 # Pytest test suite
+├── main.py                # FastAPI app factory & lifespan
+├── config.py              # pydantic-settings (all env vars)
+├── dependencies.py        # Shared FastAPI dependencies (get_supabase, get_groq)
+├── exceptions.py          # Custom exception hierarchy
+├── middleware.py           # CORS + global exception handlers
+├── api/
+│   ├── router.py          # Central router — aggregates all endpoint routers
+│   └── endpoints/
+│       ├── health.py      # GET /health
+│       ├── auth.py        # POST /auth/login, GET /auth/callback, GET /auth/me
+│       ├── sessions.py    # CRUD for interview sessions
+│       ├── setup.py       # POST /setup/jd, GET /setup/persona/{id}
+│       ├── interview.py   # WS /interview/{session_id}
+│       └── coach.py       # POST /coach/analyse/{id}, GET /coach/feedback/{id}
+├── core/
+│   ├── supabase_client.py # Supabase client init
+│   ├── groq_client.py     # Groq client init
+│   ├── tts.py             # gTTS wrapper
+│   └── security.py        # JWT validation, get_current_user dependency
+├── models/                # Pydantic request/response schemas
+├── agents/                # AI logic (setup, interviewer, coach) — no HTTP/DB
+├── services/              # Business logic layer — orchestrates agents + DB
+└── utils/                 # Helpers (audio, prompts, validators)
+tests/
+├── conftest.py            # Async test client fixture
+└── ...
 ```
 
 ## Tech Stack
