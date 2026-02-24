@@ -9,11 +9,11 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.api.router import api_router
 from app.config import settings
 from app.core.groq_client import init_groq_client
 from app.core.supabase_client import init_supabase_client
 from app.middleware import register_middleware
-from app.routers import auth, coach, health, interview, sessions, setup
 
 
 @asynccontextmanager
@@ -42,13 +42,8 @@ def create_app() -> FastAPI:
     # Middleware & exception handlers
     register_middleware(app)
 
-    # ── Routers ──────────────────────────────────────────────────────
-    app.include_router(health.router)
-    app.include_router(auth.router)
-    app.include_router(setup.router)
-    app.include_router(sessions.router)
-    app.include_router(interview.router)
-    app.include_router(coach.router)
+    # ── API Router (central aggregator) ──────────────────────────────
+    app.include_router(api_router)
 
     return app
 
