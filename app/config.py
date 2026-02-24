@@ -23,8 +23,8 @@ class AppSettings(BaseSettings):
 class SupabaseSettings(BaseSettings):
     """Supabase connection settings."""
 
-    SUPABASE_URL: str
-    SUPABASE_KEY: str  # anon / public key
+    SUPABASE_URL: str = ""
+    SUPABASE_KEY: str = ""  # anon / public key
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
@@ -32,7 +32,7 @@ class SupabaseSettings(BaseSettings):
 class GroqSettings(BaseSettings):
     """Groq API settings."""
 
-    GROQ_API_KEY: str
+    GROQ_API_KEY: str = ""
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
