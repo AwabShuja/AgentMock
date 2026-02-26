@@ -1,4 +1,4 @@
-# CareerFit AI
+# AgentMock
 
 Voice-based AI interviewer & career coach — FastAPI backend.
 
