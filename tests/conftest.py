@@ -9,13 +9,9 @@ from app.main import app
 
 
 @pytest.fixture
-def anyio_backend():
-    return "asyncio"
-
-
-@pytest.fixture
 async def client():
-    """Async HTTP test client."""
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+    """Async HTTP test client scoped to the FastAPI app."""
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test"
+    ) as ac:
         yield ac
