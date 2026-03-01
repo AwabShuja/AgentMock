@@ -16,6 +16,7 @@ class AppSettings(BaseSettings):
     APP_VERSION: str = "0.1.0"
     APP_ENV: str = "development"  # development | staging | production
     DEBUG: bool = True
+    FRONTEND_URL: str = "http://localhost:3000"  # OAuth redirect target
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
@@ -24,7 +25,8 @@ class SupabaseSettings(BaseSettings):
     """Supabase connection settings."""
 
     SUPABASE_URL: str = ""
-    SUPABASE_KEY: str = ""  # anon / public key
+    SUPABASE_KEY: str = ""          # anon / public key
+    SUPABASE_JWT_SECRET: str = ""   # Settings → API → JWT Secret
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

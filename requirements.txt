@@ -7,6 +7,8 @@ groq==0.11.0
 gTTS==2.5.3
 python-dotenv==1.0.1
 python-multipart==0.0.12
+email-validator==2.2.0
+PyJWT==2.10.1
 
 # ── Development & Testing Dependencies ──────────────────────────────
 pytest==8.3.3
