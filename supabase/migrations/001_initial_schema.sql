@@ -3,6 +3,8 @@
 -- Run this in: Supabase Dashboard → SQL Editor → New Query → Run
 -- ════════════════════════════════════════════════════════════════════
 
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- ── 1. Profiles table ───────────────────────────────────────────────
 -- Stores user profile info synced from Supabase Auth (Google OAuth).
 -- The id column references auth.users so every row maps 1:1 to a
